@@ -23,11 +23,17 @@ import (
 // GetRandomBytes randomly generates n bytes.
 func GetRandomBytes(n uint32) []byte {
 	buf := make([]byte, n)
+	getRandomBytes(buf)
+	return buf
+}
+
+// getRandomBytes is outlined so that its callers
+// can be inlined
+func getRandomBytes(buf []byte) {
 	_, err := rand.Read(buf)
 	if err != nil {
 		panic(err) // out of randomness, should never happen
 	}
-	return buf
 }
 
 // GetRandomUint32 randomly generates an unsigned 32-bit integer.
